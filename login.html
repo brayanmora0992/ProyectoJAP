@@ -17,25 +17,23 @@
 </head>
 
 <body>
-  <main class="form-signin w-25 m-auto mt-5 text-center">
-    <div>
-        <form method="POST">
-            <div><img src="/img/login.png" class="w-75 mb-3" alt=""></div>
-            <h4>Inicio de sesión</h4>
-            <div class="form-group mb-4">
-                <label class="pb-3" for="email">Email</label>
-                <input type="email" name="correo" id="email" class="form-control text-center" placeholder="usuario@correo.com" required>
-            </div>
-            <div class="form-group">
-                <label class="pb-3" for="password">Contraseña</label>
-                <input type="password" class="form-control text-center" name="passw" id="password" required minlength="8" maxlength="24" placeholder="Mínimo 8 caracteres">
-            </div>
-            <div class="mt-3">
-                <button type="submit" class="btn btn-primary" id="loginBtn">Ingresar</button>
-            </div>
-        </form>
-    </div>
-  </main> 
+
+  <main class="w-25 text-center mt-5 m-auto">
+      <img src="/img/login.png" alt="logo eMercado" class="mx-auto w-75" >
+      <h4 class="mb-3">Inicio de sesión</h4>
+      <div class="form-floating mb-3">
+          <input type="email" name="correo" id="correo" class="form-control" placeholder="Email">
+          <label for="correo">Email</label>
+      </div>
+      <div class="form-floating mb-3">
+          <input type="password" name="clave" id="clave" class="form-control" placeholder="Contraseña">
+          <label for="clave">Contraseña</label>
+      </div>
+      <div class="d-grid">
+        <button class="btn btn-primary" id="ingreso">Ingresar</button>
+      </div>
+  </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -46,7 +44,7 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
-  <script src="js/login.js"></script>
+  <script src="/js/login.js"></script>
 </body>
 
 </html>
