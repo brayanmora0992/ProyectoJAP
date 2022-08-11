@@ -188,3 +188,12 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+/*Un pequeño efecto de zoom al pasar el mouse por encima de las tarjetas*/
+.zoom:hover {
+  transform: scale(1.1);
+}
+
+.zoom{
+  transition: transform .6s;
+}
