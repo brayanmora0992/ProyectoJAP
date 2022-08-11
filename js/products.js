@@ -19,10 +19,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                                     <p class="card-text">${datos.products[i].description}</p>
                                 </div>        
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>`
+                        </div>`
                 
             }
         })
