@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     fetch(autitos)
         .then(response => response.json())
         .then(datos => {
+            /*Un bucle for que recorre el array productos y agrega contenido HTML al elemento listadoAutos*/
             for (let i = 0; i < datos.products.length; i++) {
                 listadoAutos.innerHTML += `
                         <div class="col-md-4">

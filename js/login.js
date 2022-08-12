@@ -1,3 +1,6 @@
+
+//Si el correo y la contraseña no están vacíos, guarda el email en sessionStorage y redirecciona al index.html
+ 
 function redireccion(){
         let correo = document.getElementById('correo').value;
         let contraseña = document.getElementById('clave').value;
@@ -9,6 +12,9 @@ function redireccion(){
               location.href='index.html';
         }
 }
+
+
+//Se le agrega un event listener al botón de ID "ingreso" y cuando se cliquea se llama a la función redireccion()
 
 document.addEventListener('DOMContentLoaded', ()=>{
 
