@@ -4,7 +4,10 @@ document.addEventListener("DOMContentLoaded", function(){
     //pregunto si hay un usuario loggeado, en caso de que no, redirijo
     if (usuarioLoggeado == null) {
         location.href = 'login.html'
-    }
+    } else {
+        document.getElementById('username').innerHTML = usuarioLoggeado;
+    };
+
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
         window.location = "products.html"
