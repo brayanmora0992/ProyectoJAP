@@ -1,3 +1,10 @@
+
+    //Borra el sessionStorage y redirecciona al login
+let cerrarSesion = ()=> {
+        sessionStorage.clear();
+        window.location = 'login.html'
+};
+
 document.addEventListener("DOMContentLoaded", function(){
     //guardo en una variable el campo usuario que tomo del "sesionStorage"
     let usuarioLoggeado = sessionStorage.getItem('usuario');
@@ -7,6 +14,11 @@ document.addEventListener("DOMContentLoaded", function(){
     } else {
         document.getElementById('username').innerHTML = usuarioLoggeado;
     };
+
+    //botón para cerrar sesión
+    document.getElementById('cerrarSesion').addEventListener("click", ()=>{
+        cerrarSesion();
+    });
 
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
