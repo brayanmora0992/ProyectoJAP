@@ -1,14 +1,18 @@
 document.addEventListener('DOMContentLoaded', ()=>{
-
-    const autitos = "https://japceibal.github.io/emercado-api/cats_products/101.json";
-    let listadoAutos = document.getElementById('contenido');
-
-    fetch(autitos)
+    const categoria = localStorage.getItem('catID')
+    const productos = `https://japceibal.github.io/emercado-api/cats_products/${categoria}.json`;
+    let contenido = document.getElementById('contenido');
+    let encabezado = document.getElementById('encabezado');
+    fetch(productos)
         .then(response => response.json())
         .then(datos => {
-            /*Un bucle for que recorre el array productos y agrega contenido HTML al elemento listadoAutos*/
+            /*Un bucle for que recorre el array productos y agrega contenido HTML al elemento contenido*/
+
             for (let i = 0; i < datos.products.length; i++) {
-                listadoAutos.innerHTML += `
+            /*escribo en el HTML un título con el nombre de la categoría y cambio el párrafo para que coincida con el nombre de la categoría seleccionada*/
+                encabezado.innerHTML = `<h3>${datos.catName}</h3>
+                                        <p>Verás aquí todos los productos de la categoría ${datos.catName}</p>` 
+                contenido.innerHTML += `
                         <div class="col-md-4">
                             <div class="card mb-4 shadow p-3 mb-3 bg-body rounded border-0 zoom">
                                 <img class="card-img-top rounded-2" src="${datos.products[i].image}" alt="fotoauto" style="height: 100%; width: 100%; display: block;">
