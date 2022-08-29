@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const productos = `https://japceibal.github.io/emercado-api/cats_products/${categoria}.json`;
     let contenido = document.getElementById('contenido');
     let encabezado = document.getElementById('encabezado');
+    let botonFiltro = document.getElementById('rangeFilterCount');
+    let botonLimpiar = document.getElementById('clearRangeFilter');
+    let botonAscendente = document.getElementById('sortAsc')
+    let botonDescendente = document.getElementById('sortDesc')
+
 
     fetch(productos)
         .then(response => response.json())
@@ -27,5 +32,51 @@ document.addEventListener('DOMContentLoaded', ()=>{
                         </div>`
                 
             }
+
+            function paraFiltrar(){
+                let rangoMin = parseInt(document.getElementById('rangeFilterCountMin').value);
+                let rangoMax = parseInt(document.getElementById('rangeFilterCountMax').value);
+                let arregloFiltrado = []
+                for (let x = 0; x < datos.products.length; x++) {
+                    arregloFiltrado = datos.products.filter((costo, x) => datos.products[x].cost >= rangoMin && datos.products[x].cost <= rangoMax);
+                    
+                }
+                //console.log(arregloFiltrado); /*(parapruebas)*/
+                //muestra los productos ordenados
+                arregloFiltrado.sort((min, max)=> min.cost-max.cost);
+                albumFiltrado(arregloFiltrado)
+            }
+
+            function albumFiltrado(arreglo) {
+                let album = [];
+                for (let producto of arreglo){
+                    album += `
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow p-3 mb-3 bg-body rounded border-0 zoom">
+                            <img class="card-img-top rounded-2" src="${producto.image}" alt="fotoauto" style="height: 100%; width: 100%; display: block;">
+                            <div class="card-body">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <p class="card-text fw-bolder">${producto.name} - ${producto.currency} ${producto.cost}</p>
+                                    <small class="text-muted">${producto.soldCount} vendidos</small>
+                                </div>
+                                <p class="card-text">${producto.description}</p>
+                            </div>        
+                        </div>
+                    </div>`
+                }
+                contenido.innerHTML = album;
+            };
+                
+            botonFiltro.addEventListener('click', ()=>{
+                paraFiltrar();
+            })
+            botonLimpiar.addEventListener('click', ()=>{
+                location.reload();
+            });
+
+
         })
 });
+
+
+
