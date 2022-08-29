@@ -3,11 +3,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const productos = `https://japceibal.github.io/emercado-api/cats_products/${categoria}.json`;
     let contenido = document.getElementById('contenido');
     let encabezado = document.getElementById('encabezado');
+
     fetch(productos)
         .then(response => response.json())
         .then(datos => {
             /*Un bucle for que recorre el array productos y agrega contenido HTML al elemento contenido*/
-
             for (let i = 0; i < datos.products.length; i++) {
             /*escribo en el HTML un título con el nombre de la categoría y cambio el párrafo para que coincida con el nombre de la categoría seleccionada*/
                 encabezado.innerHTML = `<h3>${datos.catName}</h3>
