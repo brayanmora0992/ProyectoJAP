@@ -3,10 +3,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const productos = `https://japceibal.github.io/emercado-api/cats_products/${categoria}.json`;
     let contenido = document.getElementById('contenido');
     let encabezado = document.getElementById('encabezado');
-    let botonFiltro = document.getElementById('rangeFilterCount');
-    let botonLimpiar = document.getElementById('clearRangeFilter');
-    let botonAscendente = document.getElementById('sortAsc')
-    let botonDescendente = document.getElementById('sortDesc')
+    let btnFiltro = document.getElementById('rangeFilterCount');
+    let btnLimpiar = document.getElementById('clearRangeFilter');
+    let btnAscendente = document.getElementById('sortAsc');
+    let btnDescendente = document.getElementById('sortDesc');
+    let btnRelevancia = document.getElementById('sortByCount');
 
 
     fetch(productos)
@@ -47,6 +48,41 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 albumFiltrado(arregloFiltrado)
             }
 
+            /*Funciones para ordenar por precio descendente, ascendente y relevancia*/
+
+            function precioDescendente(){
+                let precios = [];
+
+                for (let i = 0; i < datos.products.length; i++) {
+                    precios.push(datos.products[i])
+                };
+
+                precios.sort((min, max)=> max.cost - min.cost);
+                albumFiltrado(precios);
+            };
+
+            function precioAscendente(){
+                let precios = [];
+
+                for (let y = 0; y < datos.products.length; y++) {
+                    precios.push(datos.products[y])
+                };
+
+                precios.sort((min, max)=> min.cost - max.cost);
+                albumFiltrado(precios);
+            };
+
+            function relevancia(){
+                let cantVendidos = [];
+
+                for (let z = 0; z < datos.products.length; z++) {
+                    cantVendidos.push(datos.products[z])
+                };
+                cantVendidos.sort((min, max)=> max.soldCount - min.soldCount);
+                albumFiltrado(cantVendidos);
+            };
+
+            //Función para mostrar en pantalla la lista de productos que cumplen con el filtro establecido
             function albumFiltrado(arreglo) {
                 let album = [];
                 for (let producto of arreglo){
@@ -67,14 +103,24 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 contenido.innerHTML = album;
             };
                 
-            botonFiltro.addEventListener('click', ()=>{
+            btnFiltro.addEventListener('click', ()=>{
                 paraFiltrar();
             })
-            botonLimpiar.addEventListener('click', ()=>{
+            btnLimpiar.addEventListener('click', ()=>{
                 location.reload();
             });
+            
+            btnDescendente.addEventListener('click', ()=>{
+                precioDescendente();
+            });
 
+            btnAscendente.addEventListener('click', ()=>{
+                precioAscendente();
+            });
 
+            btnRelevancia.addEventListener('click', ()=>{
+                relevancia();
+            });
         })
 });
 
