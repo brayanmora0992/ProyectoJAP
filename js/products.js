@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let btnAscendente = document.getElementById('sortAsc');
     let btnDescendente = document.getElementById('sortDesc');
     let btnRelevancia = document.getElementById('sortByCount');
-
+    let buscador = document.getElementById('buscador');
+    let campoBuscar = document.getElementById('campoBuscar').value;
 
     fetch(productos)
         .then(response => response.json())
