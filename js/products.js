@@ -8,13 +8,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let btnAscendente = document.getElementById('sortAsc');
     let btnDescendente = document.getElementById('sortDesc');
     let btnRelevancia = document.getElementById('sortByCount');
+    /* deshabilitado hasta futuro update
     let buscador = document.getElementById('buscador');
-    let campoBuscar = document.getElementById('campoBuscar').value;
+    let campoBuscar = document.getElementById('campoBuscar').value;*/
 
     fetch(productos)
         .then(response => response.json())
         .then(datos => {
-            /*Un bucle for que recorre el array productos y agrega contenido HTML al elemento contenido*/
+            /*Un bucle for que recorre el array productos y agrega código HTML al elemento contenido*/
             for (let i = 0; i < datos.products.length; i++) {
             /*escribo en el HTML un título con el nombre de la categoría y cambio el párrafo para que coincida con el nombre de la categoría seleccionada*/
                 encabezado.innerHTML = `<h3>${datos.catName}</h3>
@@ -43,7 +44,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     arregloFiltrado = datos.products.filter((costo, x) => datos.products[x].cost >= rangoMin && datos.products[x].cost <= rangoMax);
                     
                 }
-                //console.log(arregloFiltrado); /*(parapruebas)*/
+                
                 //muestra los productos ordenados
                 arregloFiltrado.sort((min, max)=> min.cost-max.cost);
                 albumFiltrado(arregloFiltrado)
