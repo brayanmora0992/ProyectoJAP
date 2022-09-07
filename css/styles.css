@@ -200,10 +200,11 @@ a.custom-card:hover {
 
 /*redimensionamiento de imagenes*/
 .carousel-inner>.carousel-item>img, .carousel-inner> .active>img{
-  display: block;
+  display: block; 
   width: 80%;
   margin: auto;
 }
+
 /*dimensiones del contenedor de información de productos*/
 .box-container {
   width: 80%;
