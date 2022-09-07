@@ -197,3 +197,22 @@ a.custom-card:hover {
 .zoom{
   transition: transform .6s;
 }
+
+/*redimensionamiento de imagenes*/
+.carousel-inner>.carousel-item>img, .carousel-inner> .active>img{
+  display: block;
+  width: 80%;
+  margin: auto;
+}
+/*dimensiones del contenedor de información de productos*/
+.box-container {
+  width: 80%;
+  margin: auto;
+  padding-top: 5rem;
+
+}
+
+.infoList {
+  padding-left: 4rem;
+  
+}

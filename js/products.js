@@ -1,5 +1,13 @@
+//funcion para guardar el ID del producto en el localstorage
+//preguntarle al profe la razón por la cual tengo que definir la funcion fuera del "DOM CONTENT LOADED"
+function setProductID(id) {
+    localStorage.setItem("ProductID", id);
+    window.location = "product-info.html"
+}
+
+
 document.addEventListener('DOMContentLoaded', ()=>{
-    const categoria = localStorage.getItem('catID')
+    const categoria = localStorage.getItem('catID');
     const productos = `https://japceibal.github.io/emercado-api/cats_products/${categoria}.json`;
     let contenido = document.getElementById('contenido');
     let encabezado = document.getElementById('encabezado');
@@ -12,6 +20,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let buscador = document.getElementById('buscador');
     let campoBuscar = document.getElementById('campoBuscar').value;*/
 
+
+
     fetch(productos)
         .then(response => response.json())
         .then(datos => {
@@ -21,7 +31,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 encabezado.innerHTML = `<h3>${datos.catName}</h3>
                                         <p>Verás aquí todos los productos de la categoría ${datos.catName}</p>` 
                 contenido.innerHTML += `
-                        <div class="col-md-4">
+                        <div onclick="setProductID(${datos.products[i].id})" class="col-md-4">
                             <div class="card mb-4 shadow p-3 mb-3 bg-body rounded border-0 zoom">
                                 <img class="card-img-top rounded-2" src="${datos.products[i].image}" alt="fotoauto" style="height: 100%; width: 100%; display: block;">
                                 <div class="card-body">
@@ -33,8 +43,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
                                 </div>        
                             </div>
                         </div>`
-                
             }
+
 
             function paraFiltrar(){
                 let rangoMin = parseInt(document.getElementById('rangeFilterCountMin').value);
@@ -104,7 +114,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 }
                 contenido.innerHTML = album;
             };
-                
+
             btnFiltro.addEventListener('click', ()=>{
                 paraFiltrar();
             })
