@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 for (let producto of arreglo){
                     album += `
                     <div class="col-md-4">
-                        <div class="card mb-4 shadow p-3 mb-3 bg-body rounded border-0 zoom">
+                        <div onclick="setProductID(${producto.id})" class="card mb-4 shadow p-3 mb-3 bg-body rounded border-0 zoom">
                             <img class="card-img-top rounded-2" src="${producto.image}" alt="fotoauto" style="height: 100%; width: 100%; display: block;">
                             <div class="card-body">
                                 <div class="d-flex flex-row justify-content-between">
