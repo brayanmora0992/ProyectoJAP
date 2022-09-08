@@ -192,6 +192,7 @@ a.custom-card:hover {
 /*Un pequeño efecto de zoom al pasar el mouse por encima de las tarjetas*/
 .zoom:hover {
   transform: scale(1.1);
+  cursor: pointer;
 }
 
 .zoom{

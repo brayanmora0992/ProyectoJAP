@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       
 });
 
-/*function estrellitas(cant) {
+function dibujarEstrellas(cant) {
   for (let i = 1; i <= 5; i++) {
     if (i <= cant) {
       document.getElementById('estrellas').innerHTML += `<i class="fas fa-star checked"></i>`;
@@ -85,4 +85,4 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   }
 }
-estrellitas(info[x].score)*/
+dibujarEstrellas(info[x].score)
