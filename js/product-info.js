@@ -1,14 +1,17 @@
-const productID = localStorage.getItem('ProductID');
-const productInfo = `https://japceibal.github.io/emercado-api/products/${productID}.json`
-let infoContainer = document.getElementById('infoContainer')
+let productID = localStorage.getItem('ProductID');
+let productInfo = `https://japceibal.github.io/emercado-api/products/${productID}.json`;
+let commentInfo = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
+let infoContainer = document.getElementById('infoContainer');
+let commentlist = document.getElementById('commentList');
 
 document.addEventListener('DOMContentLoaded', ()=>{
     fetch(productInfo)
     .then(response => response.json())
     .then(datos => {
         //preguntar como lo hago con un for loop
+        //shadow p-5 mb-5 bg-body rounded border-0 para linea 14
             infoContainer.innerHTML = `
-            <div class="d-flex flex-row justify-content-between shadow p-5 mb-5 bg-body rounded border-0" id="cuerpoProducto">
+            <div class="d-flex flex-row justify-content-" id="cuerpoProducto"> 
             <div class="infoList">
               <div>
                 <h3>${datos.name}</h3><br>
@@ -57,4 +60,29 @@ document.addEventListener('DOMContentLoaded', ()=>{
           </div>
             `
       });
+
+      
+      fetch(commentInfo)
+      .then(response => response.json())
+      .then(info =>{
+        
+        for (let x = 0; x < info.length; x++) {
+          commentlist.innerHTML += `<li class="list-group-item"><b>${info[x].user}</b> - ${info[x].dateTime} - <span id="estrellas">${info[x].score}</span><br>
+          <span>${info[x].description}</span></li>`
+
+        }
+        
+      });
+      
 });
+
+/*function estrellitas(cant) {
+  for (let i = 1; i <= 5; i++) {
+    if (i <= cant) {
+      document.getElementById('estrellas').innerHTML += `<i class="fas fa-star checked"></i>`;
+    } else {
+      document.getElementById('estrellas').innerHTML += `<i class="fas fa-star unchecked"></i>`;
+    }
+  }
+}
+estrellitas(info[x].score)*/
