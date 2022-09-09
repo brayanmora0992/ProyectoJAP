@@ -216,5 +216,8 @@ a.custom-card:hover {
 
 .infoList {
   padding-left: 4rem;
-  
+}
+
+.form-select{
+  width: 5rem;
 }

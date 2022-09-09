@@ -3,6 +3,10 @@ let productInfo = `https://japceibal.github.io/emercado-api/products/${productID
 let commentInfo = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
 let infoContainer = document.getElementById('infoContainer');
 let commentlist = document.getElementById('commentList');
+let selectorPuntaje = document.getElementById('selectorPuntaje');
+let btnEnviarCom = document.getElementById('comentario');
+let usuario = sessionStorage.getItem('usuario');
+
 
 document.addEventListener('DOMContentLoaded', ()=>{
     fetch(productInfo)
@@ -74,15 +78,47 @@ document.addEventListener('DOMContentLoaded', ()=>{
         
       });
       
+      function dibujarEstrellas(cantPuntos) {
+        let estrellas = "";
+        for (let i = 1; i <= 5; i++) {
+          if (i <= cantPuntos) {
+            estrellas += `<i class="fas fa-star checked"></i>`;
+          } else {
+            estrellas += `<i class="far fa-star"></i>`;
+          }
+        }
+        document.getElementById('calificacion').innerHTML = estrellas;
+        
+       }
+
+       selectorPuntaje.addEventListener('change',()=>{
+        dibujarEstrellas(selectorPuntaje.value);
+
+       })
+
+       function agregarComentario(){
+        let comentario = document.getElementById('comments').value 
+        let fechaYHora = new Date()
+        let dia = fechaYHora.getDay();
+        let mes = fechaYHora.getMonth();
+        let anio = fechaYHora.getFullYear();
+        let hora = fechaYHora.getHours();
+        let min = fechaYHora.getMinutes();
+        let seg = fechaYHora.getSeconds();
+        
+        commentlist.innerHTML += `<li class="list-group-item"><b>${usuario}</b> - ${dia}-${mes}-${anio} ${hora}:${min}:${seg} - ${estrellas}<br>
+                                  <span>${comentario}</span>`
+        
+        
+       }
+
+       btnEnviarCom.addEventListener('click', ()=>{
+        agregarComentario()
+       })
+
+       
 });
 
-function dibujarEstrellas(cant) {
-  for (let i = 1; i <= 5; i++) {
-    if (i <= cant) {
-      document.getElementById('estrellas').innerHTML += `<i class="fas fa-star checked"></i>`;
-    } else {
-      document.getElementById('estrellas').innerHTML += `<i class="fas fa-star unchecked"></i>`;
-    }
-  }
-}
-dibujarEstrellas(info[x].score)
+
+
+ 
