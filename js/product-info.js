@@ -6,7 +6,7 @@ let commentlist = document.getElementById('commentList');
 let selectorPuntaje = document.getElementById('selectorPuntaje');
 let btnEnviarCom = document.getElementById('comentario');
 let usuario = sessionStorage.getItem('usuario');
-
+let estrellasCalifUsuario = ""
 
 document.addEventListener('DOMContentLoaded', ()=>{
     fetch(productInfo)
@@ -71,13 +71,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
       .then(info =>{
         
         for (let x = 0; x < info.length; x++) {
-          commentlist.innerHTML += `<li class="list-group-item"><b>${info[x].user}</b> - ${info[x].dateTime} - <span id="estrellas">${info[x].score}</span><br>
+          dibujarEstrellas(info[x].score)
+          commentlist.innerHTML += `<li class="list-group-item"><b>${info[x].user}</b> - ${info[x].dateTime} - ${estrellasCalifUsuario} <br>
           <span>${info[x].description}</span></li>`
-
+            
+            
         }
-        
+        console.log(estrellasCalifUsuario)
       });
-      
+
       function dibujarEstrellas(cantPuntos) {
         let estrellas = "";
         for (let i = 1; i <= 5; i++) {
@@ -87,33 +89,39 @@ document.addEventListener('DOMContentLoaded', ()=>{
             estrellas += `<i class="far fa-star"></i>`;
           }
         }
-        document.getElementById('calificacion').innerHTML = estrellas;
-        
+        estrellasCalifUsuario = estrellas;
        }
-
+      
+       //selector de puntaje, dibuja en estrellas el valor seleccionado
        selectorPuntaje.addEventListener('change',()=>{
-        dibujarEstrellas(selectorPuntaje.value);
-
+          dibujarEstrellas(selectorPuntaje.value);
+          document.getElementById('calificacion').innerHTML = estrellasCalifUsuario;
+          
+          
+       
        })
 
        function agregarComentario(){
         let comentario = document.getElementById('comments').value 
-        let fechaYHora = new Date()
-        let dia = fechaYHora.getDay();
-        let mes = fechaYHora.getMonth();
+        let fechaYHora = new Date();
+        let dia = fechaYHora.getDate()
+        let mes = fechaYHora.getMonth() + 1;
         let anio = fechaYHora.getFullYear();
         let hora = fechaYHora.getHours();
         let min = fechaYHora.getMinutes();
         let seg = fechaYHora.getSeconds();
         
-        commentlist.innerHTML += `<li class="list-group-item"><b>${usuario}</b> - ${dia}-${mes}-${anio} ${hora}:${min}:${seg} - ${estrellas}<br>
-                                  <span>${comentario}</span>`
-        
-        
+        if (comentario === "") {
+          alert('Por favor escriba un comentario')
+        } else {
+          commentlist.innerHTML += `<li class="list-group-item"><b>${usuario}</b> - ${anio}-${mes}-${dia} ${hora}:${min}:${seg} - ${estrellasCalifUsuario}<br>
+                                    <span>${comentario}</span>`
+        }
        }
 
        btnEnviarCom.addEventListener('click', ()=>{
         agregarComentario()
+        document.getElementById('comments').value = ""
        })
 
        
