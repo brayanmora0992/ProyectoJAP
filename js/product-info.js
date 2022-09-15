@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     fetch(productInfo)
     .then(response => response.json())
     .then(datos => {
-        //preguntar como lo hago con un for loop
         //shadow p-5 mb-5 bg-body rounded border-0 para linea 14
             infoContainer.innerHTML = `
             <div class="d-flex flex-row justify-content-" id="cuerpoProducto"> 
