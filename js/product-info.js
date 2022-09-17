@@ -71,11 +71,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         for (let x = 0; x < info.length; x++) {
           dibujarEstrellas(info[x].score)
           commentlist.innerHTML += `<li class="list-group-item"><b>${info[x].user}</b> - ${info[x].dateTime} - ${estrellasCalifUsuario} <br>
-          <span>${info[x].description}</span></li>`
-            
-            
+          <span>${info[x].description}</span></li>`   
         }
-        console.log(estrellasCalifUsuario)
       });
 
       function dibujarEstrellas(cantPuntos) {

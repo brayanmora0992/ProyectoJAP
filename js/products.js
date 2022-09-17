@@ -1,5 +1,4 @@
 //funcion para guardar el ID del producto en el localstorage
-//preguntarle al profe la razón por la cual tengo que definir la funcion fuera del "DOM CONTENT LOADED"
 function setProductID(id) {
     localStorage.setItem("ProductID", id);
     window.location = "product-info.html"
