@@ -5,6 +5,8 @@ let cerrarSesion = ()=> {
         window.location = 'login.html'
 };
 
+
+
 document.addEventListener("DOMContentLoaded", function(){
     //guardo en una variable el campo usuario que tomo del "sesionStorage"
     let usuarioLoggeado = sessionStorage.getItem('usuario');
@@ -14,11 +16,6 @@ document.addEventListener("DOMContentLoaded", function(){
     } else {
         document.getElementById('username').innerHTML = usuarioLoggeado;
     };
-
-    //botón para cerrar sesión
-    document.getElementById('cerrarSesion').addEventListener("click", ()=>{
-        cerrarSesion();
-    });
 
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
@@ -33,3 +30,19 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 });
+
+    //botón para ir al carrito
+    document.getElementById('miCarrito').addEventListener("click", ()=>{
+        window.location = 'cart.html'
+    });
+    
+    //botón para ir al perfil
+    document.getElementById('miPerfil').addEventListener("click", ()=>{
+        window.location = "my-profile.html"
+    });
+
+    //botón para cerrar sesión
+    document.getElementById('cerrarSesion').addEventListener("click", ()=>{
+        cerrarSesion();
+    });
+    

@@ -1,4 +1,5 @@
 let productID = localStorage.getItem('ProductID');
+let catID = localStorage.getItem('catID');
 let productInfo = `https://japceibal.github.io/emercado-api/products/${productID}.json`;
 let commentInfo = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
 let infoContainer = document.getElementById('infoContainer');
@@ -7,6 +8,8 @@ let selectorPuntaje = document.getElementById('selectorPuntaje');
 let btnEnviarCom = document.getElementById('comentario');
 let usuario = sessionStorage.getItem('usuario');
 let estrellasCalifUsuario = ""
+
+
 
 document.addEventListener('DOMContentLoaded', ()=>{
     fetch(productInfo)
@@ -119,8 +122,40 @@ document.addEventListener('DOMContentLoaded', ()=>{
         document.getElementById('comments').value = ""
        })
 
-       
+
+
+      fetch (`https://japceibal.github.io/emercado-api/cats_products/${catID}.json`)
+      .then(response => response.json())
+      .then(datos => {
+        let productosFiltrados = [];
+        for (let i = 0; i < datos.products.length; i++) {
+          productosFiltrados = datos.products.filter((id, i) => datos.products[i].id != productID)
+          
+        }
+        for (let x = 0; x < productosFiltrados.length; x++) {
+          document.getElementById('tarjetaProducto').innerHTML += `
+          <div class="col-sm-4 zoom">
+            <div class="card" onclick="setProductID(${productosFiltrados[x].id})">
+              <div class="card-body">
+                <img class="card-img-top" src="${productosFiltrados[x].image}">
+                <h5 class="card-title text-center">${productosFiltrados[x].name}</h5>
+              </div>
+            </div>
+          </div>`
+
+        }
+        
+      })
+      
 });
+
+//función para redireccionar al producto pertinente usando su ID
+function setProductID(id) {
+  localStorage.setItem("ProductID", id);
+  window.location = "product-info.html";
+}
+
+
 
 
 
