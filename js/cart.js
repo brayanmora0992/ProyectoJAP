@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 <td class="col-2"><img src="${articulos[i].image}" style="width:50%"></td>
                 <td>${articulos[i].name}</td>
                 <td>${articulos[i].currency} ${articulos[i].unitCost}</td>
-                <td><input class="form-control" type="number" name="valor" value="1" min="0"></td>
+                <td><input class="form-control form-size" type="number" name="valor" value="1" min="0"></td>
                 <td class="table-primary">${articulos[i].currency} <span id="${id}">${articulos[i].unitCost}</span></td>
             </tr>`
 
