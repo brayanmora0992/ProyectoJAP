@@ -221,3 +221,7 @@ a.custom-card:hover {
 .form-select{
   width: 5rem;
 }
+
+.form-control {
+  width: 50%;
+}

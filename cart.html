@@ -36,11 +36,56 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+    <div class="container col-lg-9 pt-5">
+      <h3>Carrito de Compras</h3>
+      <h5>Artículos a comprar</h5>
     </div>
+    <div class="container col-lg-9">
+      <table class="table" >
+        <thead>
+          <tr>
+              <th scope="col"></th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Costo</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="listaProductos">
+
+        </tbody>
+      </table>
+      <!-- <button class="btn btn-success" id="btn">agregar</button> -->
+    </div>
+    <section>
+      <!-- Selección de envíos -->
+      <div class="container pt-5">
+        <hr>
+        <h4>Tipo de envío</h4>
+        <input id="premium" type="radio" name="envio" value="checked">
+        <label for="premium">Premium 2 a 5 días (15%)</label><br>
+        <input id="express" type="radio" name="envio">
+        <label for="express">Express 5 a 8 días(7%)</label><br>
+        <input id="standard" type="radio" name="envio">
+        <label for="standard">Standard 12 a 15 días (5%)</label>
+      </div>
+      <div class="container pt-3">
+        <h4>Dirección de envío</h4>
+        <div class="row">
+          <div class="col-6">
+            <label for="calle" class="pb-2">Calle</label>
+            <input type="text" id="calle" class="form-control" name="calle">
+            <label for="esquina">Esquina</label>
+            <input type="text" id="esquina" class="form-control" name="esquina">
+          </div>
+          <div class="col-6 px-0">
+            <label for="numero">Número</label>
+            <input type="number" name="numero" id="numero" class="form-control">
+          </div>
+        </div>
+        <hr>
+      </div>
+    </section>
   </main>
   <footer class="text-muted">
     <div class="container">

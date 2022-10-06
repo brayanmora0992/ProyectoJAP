@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
           if (i <= cantPuntos) {
             estrellas += `<i class="fas fa-star checked"></i>`;
           } else {
-            estrellas += `<i class="far fa-star"></i>`;
+            estrellas += `<i class="fa fa-star-o" aria-hidden="true"></i>`;
           }
         }
         estrellasCalifUsuario = estrellas;
