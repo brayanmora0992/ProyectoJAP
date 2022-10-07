@@ -1,59 +1,33 @@
 const direccion = `https://japceibal.github.io/emercado-api/user_cart/25801.json`;
-let itemsCarrito = ""
-let costo = "";
-let id = ""
-let resultado = 0;
-let articulos = [];
+let listaProductos = document.getElementById('listaProductos')
+let resultado = "";
 
-function calcular(){
-    cantidad = parseInt(document.getElementById(id).value);
-    res = cantidad * costo;
-    return res
+function mostrarItems(arreglo){
+    for (let i = 0; i < arreglo.articles.length; i++) {
+        listaProductos.innerHTML += 
+        `<tr>
+            <td class="col-2"><img src="${arreglo.articles[i].image}" class="img-thumbnail"</td>
+            <td>${arreglo.articles[i].name}</td>
+            <td>${arreglo.articles[i].currency} ${arreglo.articles[i].unitCost}</td>
+            <td><input class="form-control" type="number" onchange="calcular(${arreglo.articles[i].unitCost})" value="${arreglo.articles[i].count}" id="cantidad" min="0"></td>
+            <td id="subtotal"><strong>${arreglo.articles[i].currency} ${arreglo.articles[i].unitCost}</strong></td>
+        </tr>` 
+    }
 }
 
+function calcular(monto){
+    let cantidad = parseInt(document.getElementById('cantidad').value);
+    resultado = cantidad * monto;
+    document.getElementById('subtotal').innerHTML = `<strong>USD ${resultado}</strong>`
+}
 
-// function agregar(){
-//     articulos.push({
-//         "id": 545424,
-// "name": "HONDA",
-// "count": 1,
-// "unitCost": 154545400,
-// "currency": "USD",
-// "image": "img/prod50924_1.jpg"
-//     })
-// }
-
-// document.getElementById('btn').addEventListener('click', ()=>{
-//     agregar()
-// })
-
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener("DOMContentLoaded", () => {
     fetch(direccion)
     .then(response => response.json())
-    .then(info => {
-        articulos = info.articles;
+    .then(items => {
+        console.log(items)
+        mostrarItems(items)
         
-        for (let i = 0; i < articulos.length; i++) {
-            id = i
-            costo = articulos[i].unitCost
-            itemsCarrito = 
-            `
-            <tr>
-                <td class="col-2"><img src="${articulos[i].image}" style="width:50%"></td>
-                <td>${articulos[i].name}</td>
-                <td>${articulos[i].currency} ${articulos[i].unitCost}</td>
-                <td><input class="form-control form-size" type="number" name="valor" value="1" min="0"></td>
-                <td class="table-primary">${articulos[i].currency} <span id="${id}">${articulos[i].unitCost}</span></td>
-            </tr>`
-
-            // document.getElementById(id).addEventListener('change', ()=>{
-            //     calcular()
-            //     console.log(res)
-            
-            // }) 
-        };
-        document.getElementById('listaProductos').innerHTML += itemsCarrito;
-
     })
-
+    
 });
