@@ -1,21 +1,25 @@
-let productID = localStorage.getItem('ProductID');
-let catID = localStorage.getItem('catID');
+let productID = localStorage.getItem("ProductID");
+let catID = localStorage.getItem("catID");
 let productInfo = `https://japceibal.github.io/emercado-api/products/${productID}.json`;
 let commentInfo = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
-let infoContainer = document.getElementById('infoContainer');
-let commentlist = document.getElementById('commentList');
-let selectorPuntaje = document.getElementById('selectorPuntaje');
-let btnEnviarCom = document.getElementById('comentario');
-let usuario = sessionStorage.getItem('usuario');
-let estrellasCalifUsuario = ""
+let infoContainer = document.getElementById("infoContainer");
+let commentlist = document.getElementById("commentList");
+let selectorPuntaje = document.getElementById("selectorPuntaje");
+let btnEnviarCom = document.getElementById("comentario");
+let usuario = sessionStorage.getItem("usuario");
+let estrellasCalifUsuario = "";
 
+// función para guardar en el localstorage el arreglo del producto a comprar
+function productoALocalStorage(arreglo) {
+  localStorage.setItem("Producto", JSON.stringify(arreglo));
+  console.log(arreglo);
+}
 
-
-document.addEventListener('DOMContentLoaded', ()=>{
-    fetch(productInfo)
-    .then(response => response.json())
-    .then(datos => {
-            infoContainer.innerHTML = `
+document.addEventListener("DOMContentLoaded", () => {
+  fetch(productInfo)
+    .then((response) => response.json())
+    .then((datos) => {
+      infoContainer.innerHTML = `
             <div class="d-flex flex-row justify-content-" id="cuerpoProducto"> 
             <div class="infoList">
               <div>
@@ -37,6 +41,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
               <div>
                 <h5>Precio: <span>${datos.currency} ${datos.cost}</span></h5>
               </div>
+              <div class="pt-4"><button class="btn btn-success btn-lg" id="btnComprar">Comprar</button></div>
             </div>
             <div id="carouselControls" class="carousel carousel-dark slide w-100" data-bs-ride="carousel" >
               <div class="carousel-inner" id="imgContainer">
@@ -63,77 +68,75 @@ document.addEventListener('DOMContentLoaded', ()=>{
               </button>
             </div>
           </div>
-            `
+            `;
+
+      document.getElementById("btnComprar").addEventListener("click", () => {
+        productoALocalStorage(datos);
       });
+    });
 
-      
-      fetch(commentInfo)
-      .then(response => response.json())
-      .then(info =>{
-        
-        for (let x = 0; x < info.length; x++) {
-          dibujarEstrellas(info[x].score)
-          commentlist.innerHTML += `<li class="list-group-item"><b>${info[x].user}</b> - ${info[x].dateTime} - ${estrellasCalifUsuario} <br>
-          <span>${info[x].description}</span></li>`   
-        }
-      });
+  fetch(commentInfo)
+    .then((response) => response.json())
+    .then((info) => {
+      for (let x = 0; x < info.length; x++) {
+        dibujarEstrellas(info[x].score);
+        commentlist.innerHTML += `<li class="list-group-item"><b>${info[x].user}</b> - ${info[x].dateTime} - ${estrellasCalifUsuario} <br>
+          <span>${info[x].description}</span></li>`;
+      }
+    });
 
-      function dibujarEstrellas(cantPuntos) {
-        let estrellas = "";
-        for (let i = 1; i <= 5; i++) {
-          if (i <= cantPuntos) {
-            estrellas += `<i class="fas fa-star checked"></i>`;
-          } else {
-            estrellas += `<i class="fa fa-star-o" aria-hidden="true"></i>`;
-          }
-        }
-        estrellasCalifUsuario = estrellas;
-       }
-      
-       //selector de puntaje, dibuja en estrellas el valor seleccionado
-       selectorPuntaje.addEventListener('change',()=>{
-          dibujarEstrellas(selectorPuntaje.value);
-          document.getElementById('calificacion').innerHTML = estrellasCalifUsuario;
-          
-          
-       
-       })
+  function dibujarEstrellas(cantPuntos) {
+    let estrellas = "";
+    for (let i = 1; i <= 5; i++) {
+      if (i <= cantPuntos) {
+        estrellas += `<i class="fas fa-star checked"></i>`;
+      } else {
+        estrellas += `<i class="fa fa-star-o" aria-hidden="true"></i>`;
+      }
+    }
+    estrellasCalifUsuario = estrellas;
+  }
 
-       function agregarComentario(){
-        let comentario = document.getElementById('comments').value 
-        let fechaYHora = new Date();
-        let dia = fechaYHora.getDate()
-        let mes = fechaYHora.getMonth() + 1;
-        let anio = fechaYHora.getFullYear();
-        let hora = fechaYHora.getHours();
-        let min = fechaYHora.getMinutes();
-        let seg = fechaYHora.getSeconds();
-        
-        if (comentario === "") {
-          alert('Por favor escriba un comentario')
-        } else {
-          commentlist.innerHTML += `<li class="list-group-item"><b>${usuario}</b> - ${anio}-${mes}-${dia} ${hora}:${min}:${seg} - ${estrellasCalifUsuario}<br>
-                                    <span>${comentario}</span>`
-        }
-       }
+  //selector de puntaje, dibuja en estrellas el valor seleccionado
+  selectorPuntaje.addEventListener("change", () => {
+    dibujarEstrellas(selectorPuntaje.value);
+    document.getElementById("calificacion").innerHTML = estrellasCalifUsuario;
+  });
 
-       btnEnviarCom.addEventListener('click', ()=>{
-        agregarComentario()
-        document.getElementById('comments').value = ""
-       })
+  function agregarComentario() {
+    let comentario = document.getElementById("comments").value;
+    let fechaYHora = new Date();
+    let dia = fechaYHora.getDate();
+    let mes = fechaYHora.getMonth() + 1;
+    let anio = fechaYHora.getFullYear();
+    let hora = fechaYHora.getHours();
+    let min = fechaYHora.getMinutes();
+    let seg = fechaYHora.getSeconds();
 
+    if (comentario === "") {
+      alert("Por favor escriba un comentario");
+    } else {
+      commentlist.innerHTML += `<li class="list-group-item"><b>${usuario}</b> - ${anio}-${mes}-${dia} ${hora}:${min}:${seg} - ${estrellasCalifUsuario}<br>
+                                    <span>${comentario}</span>`;
+    }
+  }
 
+  btnEnviarCom.addEventListener("click", () => {
+    agregarComentario();
+    document.getElementById("comments").value = "";
+  });
 
-      fetch (`https://japceibal.github.io/emercado-api/cats_products/${catID}.json`)
-      .then(response => response.json())
-      .then(datos => {
-        let productosFiltrados = [];
-        for (let i = 0; i < datos.products.length; i++) {
-          productosFiltrados = datos.products.filter((id, i) => datos.products[i].id != productID)
-          
-        }
-        for (let x = 0; x < productosFiltrados.length; x++) {
-          document.getElementById('tarjetaProducto').innerHTML += `
+  fetch(`https://japceibal.github.io/emercado-api/cats_products/${catID}.json`)
+    .then((response) => response.json())
+    .then((datos) => {
+      let productosFiltrados = [];
+      for (let i = 0; i < datos.products.length; i++) {
+        productosFiltrados = datos.products.filter(
+          (id, i) => datos.products[i].id != productID
+        );
+      }
+      for (let x = 0; x < productosFiltrados.length; x++) {
+        document.getElementById("tarjetaProducto").innerHTML += `
           <div class="col-sm-4 zoom">
             <div class="card" onclick="setProductID(${productosFiltrados[x].id})">
               <div class="card-body">
@@ -141,12 +144,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 <h5 class="card-title text-center">${productosFiltrados[x].name}</h5>
               </div>
             </div>
-          </div>`
-
-        }
-        
-      })
-      
+          </div>`;
+      }
+    });
 });
 
 //función para redireccionar al producto pertinente usando su ID
@@ -154,9 +154,3 @@ function setProductID(id) {
   localStorage.setItem("ProductID", id);
   window.location = "product-info.html";
 }
-
-
-
-
-
- 
