@@ -84,6 +84,23 @@
     </section>
   </main>
 
+<!-- Ventana Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modalCarrito" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h1 class="modal-title fs-5 w-100" id="modalCarrito">Producto agregado al carrito</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img class="w-50 mx-auto d-block" src="/img/carrito.png" alt="foto carrito">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-lg mx-auto" id="alCarrito">Ir al carrito</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <footer class="text-muted">
     <div class="container">
@@ -107,5 +124,6 @@
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
 </body>
+
 
 </html>

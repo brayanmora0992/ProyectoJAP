@@ -15,15 +15,24 @@ function mostrarItems(arreglo){
     }
 }
 
+function traerProductoLocalStorage(){
+    carrito = JSON.parse(localStorage.getItem('Producto'))
+    mostrarProductosAgregadosAlCarrito(carrito)
+}
+
 function mostrarProductosAgregadosAlCarrito(producto){
-    listaProductos.innerHTML += 
-    `<tr>
-        <td class="col-2"><img src="${producto.images[0]}" class="img-thumbnail"</td>
-        <td>${producto.name}</td>
-        <td>${producto.currency} <span class="costoUnitario">${producto.cost}</span></td>
-        <td><input class="form-control cantidades" type="number" onchange="calcular()" value="1" id="cantidad" min="0"></td>
-        <td><strong>${producto.currency} <span class="subtotales">${producto.cost}</span></strong></td>
-    </tr>` 
+    for (let i = 0; i < producto.length; i++) {
+        listaProductos.innerHTML += 
+        `<tr>
+            <td class="col-2"><img src="${producto[i].images[0]}" class="img-thumbnail"</td>
+            <td>${producto[i].name}</td>
+            <td>${producto[i].currency} <span class="costoUnitario">${producto[i].cost}</span></td>
+            <td><input class="form-control cantidades" type="number" onchange="calcular()" value="1" id="cantidad" min="0"></td>
+            <td><strong>${producto[i].currency} <span class="subtotales">${producto[i].cost}</span></strong></td>
+        </tr>` 
+        
+    }
+
 }
 
 function calcular(){
@@ -43,14 +52,6 @@ function calcular(){
         
     }
 }
-
-function traerProductoLocalStorage(){
-    carrito = JSON.parse(localStorage.getItem('Producto'))
-    mostrarProductosAgregadosAlCarrito(carrito)
-}
-
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
     fetch(direccion)

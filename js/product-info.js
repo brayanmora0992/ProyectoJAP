@@ -10,11 +10,18 @@ let usuario = sessionStorage.getItem("usuario");
 let estrellasCalifUsuario = "";
 
 // función para guardar en el localstorage el arreglo del producto a comprar
+//preguntar porque esto funciona...
 function productoALocalStorage(arreglo) {
-  localStorage.setItem("Producto", JSON.stringify(arreglo));
-  console.log(arreglo);
+  let listaCarrito = [];
+  listaCarrito = JSON.parse(localStorage.getItem('Producto')) || [];
+  listaCarrito.push(arreglo)
+  console.log(listaCarrito)
+  localStorage.setItem('Producto', JSON.stringify(listaCarrito));
 }
 
+document.getElementById('alCarrito').addEventListener('click', ()=>{
+  location.href = 'cart.html'
+})
 document.addEventListener("DOMContentLoaded", () => {
   fetch(productInfo)
     .then((response) => response.json())
@@ -41,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <div>
                 <h5>Precio: <span>${datos.currency} ${datos.cost}</span></h5>
               </div>
-              <div class="pt-4"><button class="btn btn-success btn-lg" id="btnComprar">Comprar</button></div>
+              <div class="pt-4"><button class="btn btn-success btn-lg" id="btnComprar" data-bs-toggle="modal" data-bs-target="#exampleModal">Comprar</button></div>
             </div>
             <div id="carouselControls" class="carousel carousel-dark slide w-100" data-bs-ride="carousel" >
               <div class="carousel-inner" id="imgContainer">
@@ -69,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
           </div>
             `;
-
+      //botón comprar para agregar al carrito
       document.getElementById("btnComprar").addEventListener("click", () => {
         productoALocalStorage(datos);
       });
