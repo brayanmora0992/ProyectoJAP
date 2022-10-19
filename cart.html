@@ -56,13 +56,6 @@
 
         </tbody>
       </table>
-      <div class="container col-lg-11">
-        <div class="table">
-          <div class="text-end">
-            <span id="total"></span>
-          </div>
-        </div>
-      </div>
       <!-- final de tabla -->
     </div>
     <section>
@@ -70,11 +63,11 @@
       <div class="container pt-5">
         <hr>
         <h4>Tipo de envío</h4>
-        <input id="premium" type="radio" name="envio" value="checked">
+        <input id="premium" type="radio" name="envio">
         <label for="premium">Premium 2 a 5 días (15%)</label><br>
         <input id="express" type="radio" name="envio">
         <label for="express">Express 5 a 8 días(7%)</label><br>
-        <input id="standard" type="radio" name="envio">
+        <input id="standard" type="radio" name="envio" checked>
         <label for="standard">Standard 12 a 15 días (5%)</label>
       </div>
       <div class="container pt-3">
@@ -92,6 +85,34 @@
           </div>
         </div>
         <hr>
+      </div>
+      <div class="container">
+        <h3>Costos</h3>
+        <div>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Subtotal</div>
+                <span class="fs-6">Costo unitario del producto por unidad</span>
+              </div>
+              <span id="total"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Costo de envío</div>
+                <span class="fs-6">Según el tipo de envío</span>
+              </div>
+              <span id="valorEnvio"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Total ($)</div>
+              </div>
+              <span id="costoTotal"></span>
+            </li>
+          </ul>
+        </div>
+       
       </div>
     </section>
   </main>
