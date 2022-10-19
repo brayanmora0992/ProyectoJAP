@@ -10,12 +10,10 @@ let usuario = sessionStorage.getItem("usuario");
 let estrellasCalifUsuario = "";
 
 // función para guardar en el localstorage el arreglo del producto a comprar
-//preguntar porque esto funciona...
 function productoALocalStorage(arreglo) {
   let listaCarrito = [];
   listaCarrito = JSON.parse(localStorage.getItem('Producto')) || [];
   listaCarrito.push(arreglo)
-  console.log(listaCarrito)
   localStorage.setItem('Producto', JSON.stringify(listaCarrito));
 }
 
