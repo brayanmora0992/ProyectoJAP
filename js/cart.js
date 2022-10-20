@@ -80,6 +80,10 @@ function calcular(){
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    let transfBancaria = document.getElementById('transfbancaria');
+    let tarjetaCredito = document.getElementById('tarjetaCredito');
+    let medioPagoSelec = document.getElementById('medioPagoSelec');
+
     fetch(direccion)
     .then(response => response.json())
     .then(items => {
@@ -95,4 +99,11 @@ document.addEventListener("DOMContentLoaded", () => {
         calcular()
     })
     
+    document.getElementById('cerrar').addEventListener('click',()=>{
+        if (transfBancaria.checked) {
+            medioPagoSelec.innerHTML = 'Transferencia bancaria';
+        } else if (tarjetaCredito.checked){
+            medioPagoSelec.innerHTML = 'Tarjeta de crédito';        
+        }
+    })
 });

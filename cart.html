@@ -59,35 +59,53 @@
       <!-- final de tabla -->
     </div>
     <section>
-      <!-- Selección de envíos -->
-      <div class="container pt-5">
-        <hr>
-        <h4>Tipo de envío</h4>
-        <input id="premium" type="radio" name="envio">
-        <label for="premium">Premium 2 a 5 días (15%)</label><br>
-        <input id="express" type="radio" name="envio">
-        <label for="express">Express 5 a 8 días (7%)</label><br>
-        <input id="standard" type="radio" name="envio" checked>
-        <label for="standard">Standard 12 a 15 días (5%)</label>
-      </div>
-      <div class="container pt-3">
-        <h4>Dirección de envío</h4>
-        <div class="row">
-          <div class="col-6">
-            <label for="calle" class="pb-2">Calle</label>
-            <input type="text" id="calle" class="form-control form-size" name="calle">
-            <label for="esquina" class="pt-3">Esquina</label>
-            <input type="text" id="esquina" class="form-control form-size" name="esquina">
-          </div>
-          <div class="col-6">
-            <label for="numero" class="pb-2">Número</label>
-            <input type="number" name="numero" id="numero" class="form-control form-size">
-          </div>
+    <!-- Selección de envíos -->
+    <form class="needs-validation" novalidate>
+        <div class="container pt-5">
+          <hr>
+          <h4>Tipo de envío</h4>
+          <input id="premium" type="radio" name="envio">
+          <label for="premium">Premium 2 a 5 días (15%)</label><br>
+          <input id="express" type="radio" name="envio">
+          <label for="express">Express 5 a 8 días (7%)</label><br>
+          <input id="standard" type="radio" name="envio" checked>
+          <label for="standard">Standard 12 a 15 días (5%)</label>
         </div>
+        <div class="container pt-3">
+          <h4>Dirección de envío</h4>
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <div>
+                <label for="calle" class="pb-2 form-label">Calle</label>
+                <input type="text" id="calle" class="form-control form-size" name="calle" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Debe ingresar una calle
+                </div>
+              </div>
+              <div>
+                <label for="esquina" class="pt-3 form-label">Esquina</label>
+                <input type="text" id="esquina" class="form-control form-size" name="esquina" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <label for="numero" class="pb-2 form-label">Número</label>
+              <input type="number" name="numero" id="numero" class="form-control form-size" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+          </div>  
+      
         <hr>
       </div>
       <div class="container">
-        <h3>Costos</h3>
+        <h4>Costos</h4>
         <div>
           <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -112,8 +130,64 @@
             </li>
           </ul>
         </div>
-       
       </div>
+    
+    </section>
+    <!-- Forma de pago -->
+    <section>
+      <div class="container">
+        <hr>
+        <h4>Forma de pago</h4>
+        <span id="medioPagoSelec">No ha seleccionado</span> <a href="" data-bs-toggle="modal" data-bs-target="#modalPago">seleccionar</a>
+        <div class="d-grid gap-2 py-3">
+          <button type="submit" class="btn btn-success btn-lg">Finalizar compra</button>
+        </div>
+        <!-- Ventana modal de forma de pago -->
+        <!-- Modal -->
+          <div class="modal fade" id="modalPago" tabindex="-1" aria-labelledby="modalPagolabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="modalPagolabel">Forma de pago</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <input type="radio" id="tarjetaCredito" name="pago" value="tarjetaCredito"> <label for="tarjetaCredito">Tarjeta de crédito</label>
+                  <hr>
+                  <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                      <label for="num">Número de tarjeta</label>
+                      <input class="form-control" type="number" id="num">
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                      <div>
+                        <label for="codigo">Código de seg.</label>
+                        <input class="form-control w-50" type="number" id="codigo">
+                      </div>
+
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 py-3">
+                      <label for="vencimiento">Vencimiento (MM/AA)</label>
+                      <input class="form-control" type="text" id="vencimiento">
+                    </div>
+                  </div>
+                  <input type="radio" id="transfbancaria" name="pago" value="tarjetaCredito"> <label for="transfbancaria">Transferencia bancaria</label>
+                  <hr>
+                  <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 py-3">
+                      <label for="numCuenta">Número de cuenta</label>
+                      <input class="form-control" type="number" id="numCuenta">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="cerrar" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </form>
     </section>
   </main>
   <footer class="text-muted">
