@@ -46,13 +46,10 @@ function convertir(arreglo){
     arregloConvertido.cost = arreglo.articles[0].unitCost
     arregloConvertido.currency = arreglo.articles[0].currency
     arregloConvertido.images = images;
-
-    console.log(arregloConvertido)
 }
 
 function borrarArticulo(indice){
     carrito.splice(indice, 1)
-    console.log(carrito)
     mostrarProductosAgregadosAlCarrito(carrito);
 
 }
