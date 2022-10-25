@@ -8,6 +8,8 @@ let campoNumTarjeta = document.getElementById('num');
 let codigoSeg = document.getElementById('codigo');
 let vencimiento = document.getElementById('vencimiento');
 let campoNumCuenta = document.getElementById('numCuenta');
+let btnBorrar = document.getElementsByClassName('borrar');
+let arregloConvertido = {};
 let carrito = [];
 
 function verificarCamposModal(){
@@ -19,38 +21,72 @@ function verificarCamposModal(){
     }
 }
 
-
 function mostrarItems(arreglo){
     for (let i = 0; i < arreglo.articles.length; i++) {
-        listaProductos.innerHTML += 
+        let articulosCarrito = "";
+        articulosCarrito += 
         `<tr>
             <td class="col-2"><img src="${arreglo.articles[i].image}" class="img-thumbnail"</td>
             <td>${arreglo.articles[i].name}</td>
             <td>${arreglo.articles[i].currency} <span class="costoUnitario">${arreglo.articles[i].unitCost}</span></td>
             <td><input class="form-control cantidades" type="number" onchange="calcular()" value="${arreglo.articles[i].count}" id="cantidad" min="1"></td>
             <td><strong><span class="tipoCambio">${arreglo.articles[i].currency}</span> <span class="subtotales">${arreglo.articles[i].unitCost}</span></strong></td>
+            <td><button class="btn btn-danger borrar"><i class="fas fa-trash-alt"></i></button></td>
         </tr>` 
+
+        listaProductos.innerHTML = articulosCarrito;
     }
+}
+
+//Función para modificar el arreglo al que se le hace fetch, la razón es para integrarlo luego en el arreglo "carrito"
+function convertir(arreglo){
+    let images = [];
+    images.push(arreglo.articles[0].image);
+    arregloConvertido.name = arreglo.articles[0].name
+    arregloConvertido.cost = arreglo.articles[0].unitCost
+    arregloConvertido.currency = arreglo.articles[0].currency
+    arregloConvertido.images = images;
+
+    console.log(arregloConvertido)
+}
+
+function borrarArticulo(indice){
+    carrito.splice(indice, 1)
+    console.log(carrito)
+    mostrarProductosAgregadosAlCarrito(carrito);
+
 }
 
 function traerProductoLocalStorage(){
     carrito = JSON.parse(localStorage.getItem('Producto'))
+    carrito.unshift(arregloConvertido)
     mostrarProductosAgregadosAlCarrito(carrito)
+    
 }
 
+
 function mostrarProductosAgregadosAlCarrito(producto){
+    let articulosCarrito = "";
     for (let i = 0; i < producto.length; i++) {
-        listaProductos.innerHTML += 
+        articulosCarrito += 
         `<tr>
             <td class="col-2"><img src="${producto[i].images[0]}" class="img-thumbnail"</td>
             <td>${producto[i].name}</td>
             <td>${producto[i].currency} <span class="costoUnitario">${producto[i].cost}</span></td>
             <td><input class="form-control cantidades" type="number" onchange="calcular()" value="1" id="cantidad" min="1"></td>
             <td><strong><span class="tipoCambio">${producto[i].currency}</span> <span class="subtotales">${producto[i].cost}</span></strong></td>
+            <td><button class="btn btn-danger borrar"><i class="fas fa-trash-alt"></i></button></td>
         </tr>` 
-        
     }
 
+    listaProductos.innerHTML = articulosCarrito;
+    calcular()
+    
+    for (let x = 0; x < btnBorrar.length; x++) {
+        btnBorrar[x].addEventListener('click', ()=>{
+            borrarArticulo(x)
+        })
+    }
 }
 
 function calcular(){
@@ -120,16 +156,10 @@ function deshabilitarInputs(){
         codigoSeg.disabled = false; 
         vencimiento.disabled = false;   
     }
-
 }
 
 
-
 document.addEventListener("DOMContentLoaded", () => {
-
-/* A function that is called when the form is submitted. It checks if the form is valid and if it is
-not, it prevents the default action and stops the propagation of the event. It also calls the
-function validacion(). */
     Array.prototype.slice.call(formularios)
     .forEach(function (formularios) {
       formularios.addEventListener('submit', function (event) {
@@ -146,8 +176,12 @@ function validacion(). */
     fetch(direccion)
     .then(response => response.json())
     .then(items => {
-        mostrarItems(items)
-        traerProductoLocalStorage()
+        convertir(items)
+        if (localStorage.getItem('Producto')===null) {
+            mostrarItems(items)
+        } else {
+            traerProductoLocalStorage()
+        }
         calcular()
     })
 
