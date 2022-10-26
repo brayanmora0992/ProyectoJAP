@@ -225,3 +225,7 @@ a.custom-card:hover {
 .form-size {
   width: 50%;
 }
+
+.forma-pago-invalida {
+  color: red;
+}

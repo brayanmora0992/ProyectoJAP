@@ -12,14 +12,23 @@ let btnBorrar = document.getElementsByClassName('borrar');
 let arregloConvertido = {};
 let carrito = [];
 
-function verificarCamposModal(){
-    let validity = true;
-    if (!campoNumTarjeta.checkValidity() || !vencimiento.checkValidity() || !codigoSeg.checkValidity() || !transfBancaria.checkValidity()) {
-        campoNumCuenta.setCustomValidity(false)
-        validity = false;
+// function verificarCamposModal(){
+//     let validity = true
 
-    }
-}
+//     if (tarjetaCredito.checked && !campoNumTarjeta.checkValidity() || !vencimiento.checkValidity() || !codigoSeg.checkValidity()) {
+//         validity = false
+//         campoNumTarjeta.setCustomValidity('va algo')
+//         vencimiento.setCustomValidity('va algo')
+//         codigoSeg.setCustomValidity('va algo')
+//     } else {
+//         campoNumTarjeta.setCustomValidity('')
+//         vencimiento.setCustomValidity('')
+//         codigoSeg.setCustomValidity('')
+
+
+
+//     }
+// }
 
 function mostrarItems(arreglo){
     for (let i = 0; i < arreglo.articles.length; i++) {
@@ -155,6 +164,24 @@ function deshabilitarInputs(){
     }
 }
 
+function alertaFormularioErroneo(){
+    Swal.fire({
+        title: 'Debes completar el formulario',
+        text: 'Presione "volver" para completarlo',
+        icon: 'error',
+        confirmButtonText: 'Volver'
+      })
+}
+
+function alertaFormularioCorrecto(){
+    Swal.fire({
+        title: '¡Compra realizada correctamente!',
+        text: 'Presione el botón para continuar',
+        icon: 'success',
+        confirmButtonText: 'Continuar'
+      })
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
     Array.prototype.slice.call(formularios)
@@ -163,10 +190,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!formularios.checkValidity()) {
           event.preventDefault()
           event.stopPropagation()
-          verificarCamposModal()
+          document.getElementById('medioPagoSelec').classList.add('forma-pago-invalida')
+          document.getElementById('medioPagoSelec').innerHTML = " Debe seleccionar un método de pago"
+          alertaFormularioErroneo()
+         
         } 
-
-        formularios.classList.add('was-validated')
+        
+         formularios.classList.add('was-validated')
+        
       }, false)
     })
 
@@ -195,11 +226,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById('tarjetaCredito').addEventListener('click', ()=>{
         deshabilitarInputs()
+        
     })
     
     document.getElementById('cerrar').addEventListener('click',()=>{
         mostrarMedioDePago()
+        document.getElementById('medioPagoSelec').classList.remove("forma-pago-invalida")
     })
 
-    
+
 });
+
