@@ -12,24 +12,24 @@ let btnBorrar = document.getElementsByClassName('borrar');
 let arregloConvertido = {};
 let carrito = [];
 
-// function verificarCamposModal(){
-//     let validity = true
+//Borra el sessionStorage y redirecciona al login
+    let cerrarSesion = ()=> {
+        sessionStorage.clear();
+        window.location = 'login.html'
+    };
 
-//     if (tarjetaCredito.checked && !campoNumTarjeta.checkValidity() || !vencimiento.checkValidity() || !codigoSeg.checkValidity()) {
-//         validity = false
-//         campoNumTarjeta.setCustomValidity('va algo')
-//         vencimiento.setCustomValidity('va algo')
-//         codigoSeg.setCustomValidity('va algo')
-//     } else {
-//         campoNumTarjeta.setCustomValidity('')
-//         vencimiento.setCustomValidity('')
-//         codigoSeg.setCustomValidity('')
+    function hayUsuario() {
+      //guardo en una variable el campo usuario que tomo del "sesionStorage"
+      let usuarioLoggeado = sessionStorage.getItem("usuario");
 
-
-
-//     }
-// }
-
+      //pregunto si hay un usuario loggeado, en caso de que no, redirijo
+      if (usuarioLoggeado == null) {
+        location.href = "login.html";
+      } else {
+        document.getElementById("username").innerHTML = usuarioLoggeado;
+      }
+    }
+    
 function mostrarItems(arreglo){
     for (let i = 0; i < arreglo.articles.length; i++) {
         let articulosCarrito = "";
@@ -234,6 +234,27 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('medioPagoSelec').classList.remove("forma-pago-invalida")
     })
 
+    hayUsuario()
+
+    //botón para ir al perfil
+    document.getElementById('miPerfil').addEventListener("click", ()=>{
+        window.location = "my-profile.html"
+    });
+    
+    //botón para ir al carrito
+    document.getElementById('miCarrito').addEventListener("click", ()=>{
+        window.location = 'cart.html'
+    });
+    
+    //botón para ir al perfil
+    document.getElementById('miPerfil').addEventListener("click", ()=>{
+        window.location = "my-profile.html"
+    });
+
+    //botón para cerrar sesión
+    document.getElementById('cerrarSesion').addEventListener("click", ()=>{
+        cerrarSesion();
+    });
 
 });
 

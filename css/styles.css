@@ -229,3 +229,8 @@ a.custom-card:hover {
 .forma-pago-invalida {
   color: red;
 }
+
+/*cursor cambia a puntero cuando se pasa por encima de un item*/
+.dropdown-item {
+  cursor: pointer;
+}

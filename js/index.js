@@ -5,17 +5,22 @@ let cerrarSesion = ()=> {
         window.location = 'login.html'
 };
 
-
-
-document.addEventListener("DOMContentLoaded", function(){
+function hayUsuario(){
     //guardo en una variable el campo usuario que tomo del "sesionStorage"
     let usuarioLoggeado = sessionStorage.getItem('usuario');
-    //pregunto si hay un usuario loggeado, en caso de que no, redirijo
-    if (usuarioLoggeado == null) {
+
+     //pregunto si hay un usuario loggeado, en caso de que no, redirijo
+     if (usuarioLoggeado == null) {
         location.href = 'login.html'
     } else {
         document.getElementById('username').innerHTML = usuarioLoggeado;
     };
+
+}
+
+
+document.addEventListener("DOMContentLoaded", function(){
+    hayUsuario();
 
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
