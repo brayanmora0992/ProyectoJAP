@@ -193,13 +193,16 @@ document.addEventListener("DOMContentLoaded", () => {
           document.getElementById('medioPagoSelec').classList.add('forma-pago-invalida')
           document.getElementById('medioPagoSelec').innerHTML = " Debe seleccionar un método de pago"
           alertaFormularioErroneo()
-         
-        } 
+        } else {
+            alertaFormularioCorrecto()
+           event.preventDefault()
+        }
         
          formularios.classList.add('was-validated')
-        
+         
       }, false)
     })
+    
 
     fetch(direccion)
     .then(response => response.json())
