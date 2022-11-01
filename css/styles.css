@@ -234,3 +234,15 @@ a.custom-card:hover {
 .dropdown-item {
   cursor: pointer;
 }
+
+/*Media query para formulario login*/
+
+@media(min-width: 992px) {
+  .form-inicio {
+    width: 25%;
+  }
+}
+
+body {
+  background-color: rgb(248, 249, 250);
+}
