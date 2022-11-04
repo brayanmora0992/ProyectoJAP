@@ -1,12 +1,6 @@
 let correoDelUsuario = document.getElementById("email");
 const formularios = document.querySelectorAll(".needs-validation");
 
-function siUsuarioNoEstaLoggeado() {
-  if (sessionStorage.getItem("usuario") === null) {
-    location.href = "login.html";
-  }
-}
-
 //Esta función trae el correo del usuario del sessionStorage y lo muestra en el campo "E-mail" de perfil del usuario
 function mostrarCorreo() {
   let correo = sessionStorage.getItem("usuario");
@@ -23,6 +17,7 @@ function guardarDatos() {
   let segundoApellido = document.getElementById("segundoApellido").value;
   let email = document.getElementById("email").value;
   let tel = document.getElementById("tel").value;
+  let avatar = document.getElementById("imgPerfil").src;
 
   datosUsuario.nombre = primerNombre;
   datosUsuario.segundoNombre = segundoNombre;
@@ -30,6 +25,7 @@ function guardarDatos() {
   datosUsuario.segundoApellido = segundoApellido;
   datosUsuario.email = email;
   datosUsuario.tel = tel;
+  datosUsuario.avatar = avatar;
   localStorage.setItem("datosUsuario", JSON.stringify(datosUsuario));
 }
 
@@ -47,6 +43,7 @@ function mostrarDatosUsuario() {
     document.getElementById("segundoApellido").value =
       datosUsuario[i].segundoApellido;
     document.getElementById("tel").value = datosUsuario[i].tel;
+    document.getElementById("imgPerfil").src = datosUsuario[i].avatar;
   }
 }
 
@@ -69,10 +66,29 @@ function alertaFormularioCorrecto() {
   });
 }
 
+
+//función para capturar la imagen subida 
+function mostrarImagen(){
+  let avatar = document.querySelector('img');
+  let archivo = document.querySelector('input[type=file]').files[0];
+  let lector = new FileReader();
+
+  lector.addEventListener('load', ()=> {
+    avatar.src = lector.result;
+  })
+
+  if (archivo) {
+    lector.readAsDataURL(archivo);
+    console.log(archivo)
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   siUsuarioNoEstaLoggeado();
   mostrarCorreo();
-
+  document.getElementById('imgSubida').addEventListener('change', ()=>{
+    mostrarImagen();
+  })
   if (localStorage.getItem("datosUsuario") !== null) {
     mostrarDatosUsuario();
   }

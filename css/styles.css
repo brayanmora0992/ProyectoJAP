@@ -246,3 +246,12 @@ a.custom-card:hover {
 body {
   background-color: rgb(248, 249, 250);
 }
+
+/*avatar img*/
+.avatar {
+  height: 200px;
+  width: 220px;
+  object-fit: cover;
+  
+
+}
