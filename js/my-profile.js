@@ -1,6 +1,25 @@
 let correoDelUsuario = document.getElementById("email");
 const formularios = document.querySelectorAll(".needs-validation");
 
+//Borra el sessionStorage y redirecciona al login
+let cerrarSesion = ()=> {
+  sessionStorage.clear();
+  window.location = 'login.html'
+};
+
+function hayUsuario() {
+//guardo en una variable el campo usuario que tomo del "sesionStorage"
+let usuarioLoggeado = sessionStorage.getItem("usuario");
+
+//pregunto si hay un usuario loggeado, en caso de que no, redirijo
+if (usuarioLoggeado == null) {
+  location.href = "login.html";
+} else {
+  document.getElementById("username").innerHTML = usuarioLoggeado;
+}
+}
+
+
 //Esta función trae el correo del usuario del sessionStorage y lo muestra en el campo "E-mail" de perfil del usuario
 function mostrarCorreo() {
   let correo = sessionStorage.getItem("usuario");
@@ -79,7 +98,6 @@ function mostrarImagen(){
 
   if (archivo) {
     lector.readAsDataURL(archivo);
-    console.log(archivo)
   }
 }
 
@@ -112,4 +130,27 @@ document.addEventListener("DOMContentLoaded", () => {
       false
     );
   });
+
+  hayUsuario()
+
+  //botón para ir al perfil
+  document.getElementById('miPerfil').addEventListener("click", ()=>{
+      window.location = "my-profile.html"
+  });
+  
+  //botón para ir al carrito
+  document.getElementById('miCarrito').addEventListener("click", ()=>{
+      window.location = 'cart.html'
+  });
+  
+  //botón para ir al perfil
+  document.getElementById('miPerfil').addEventListener("click", ()=>{
+      window.location = "my-profile.html"
+  });
+
+  //botón para cerrar sesión
+  document.getElementById('cerrarSesion').addEventListener("click", ()=>{
+      cerrarSesion();
+  });
+
 });
