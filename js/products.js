@@ -4,6 +4,23 @@ function setProductID(id) {
     window.location = "product-info.html"
 }
 
+//Borra el sessionStorage y redirecciona al login
+let cerrarSesion = ()=> {
+    sessionStorage.clear();
+    window.location = 'login.html'
+};
+
+function hayUsuario() {
+  //guardo en una variable el campo usuario que tomo del "sesionStorage"
+  let usuarioLoggeado = sessionStorage.getItem("usuario");
+
+  //pregunto si hay un usuario loggeado, en caso de que no, redirijo
+  if (usuarioLoggeado == null) {
+    location.href = "login.html";
+  } else {
+    document.getElementById("username").innerHTML = usuarioLoggeado;
+  }
+}
 
 document.addEventListener('DOMContentLoaded', ()=>{
     const categoria = localStorage.getItem('catID');
@@ -19,7 +36,27 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let buscador = document.getElementById('buscador');
     let campoBuscar = document.getElementById('campoBuscar').value;*/
 
+    hayUsuario()
 
+    //botón para ir al perfil
+    document.getElementById('miPerfil').addEventListener("click", ()=>{
+        window.location = "my-profile.html"
+    });
+    
+    //botón para ir al carrito
+    document.getElementById('miCarrito').addEventListener("click", ()=>{
+        window.location = 'cart.html'
+    });
+    
+    //botón para ir al perfil
+    document.getElementById('miPerfil').addEventListener("click", ()=>{
+        window.location = "my-profile.html"
+    });
+
+    //botón para cerrar sesión
+    document.getElementById('cerrarSesion').addEventListener("click", ()=>{
+        cerrarSesion();
+    });
 
     fetch(productos)
         .then(response => response.json())

@@ -22,7 +22,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link active" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
@@ -30,8 +30,16 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-          </li>
+          <!------------Menu dropdown para cerrar sesión---------------->
+          <div class="btn-group">
+            <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="username"></button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li class="dropdown-item" id="miCarrito">Carrito</li>
+                <li class="dropdown-item" id="miPerfil">Mi Perfil</li>
+                <li class="dropdown-item" id="cerrarSesion">Cerrar Sesión</li>
+            </ul>
+          </div>
+          <!------------------------------------------------------------>
         </ul>
       </div>
     </div>

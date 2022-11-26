@@ -24,6 +24,24 @@ function updateTotalCosts(){
     totalCostHTML.innerHTML = totalCostToShow;
 }
 
+//Borra el sessionStorage y redirecciona al login
+let cerrarSesion = ()=> {
+    sessionStorage.clear();
+    window.location = 'login.html'
+};
+
+function hayUsuario() {
+  //guardo en una variable el campo usuario que tomo del "sesionStorage"
+  let usuarioLoggeado = sessionStorage.getItem("usuario");
+
+  //pregunto si hay un usuario loggeado, en caso de que no, redirijo
+  if (usuarioLoggeado == null) {
+    location.href = "login.html";
+  } else {
+    document.getElementById("username").innerHTML = usuarioLoggeado;
+  }
+}
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -145,5 +163,27 @@ document.addEventListener("DOMContentLoaded", function(e){
                 document.getElementById("alertResult").classList.add("show");
             });
         }
+    });
+
+    hayUsuario()
+
+    //botón para ir al perfil
+    document.getElementById('miPerfil').addEventListener("click", ()=>{
+        window.location = "my-profile.html"
+    });
+    
+    //botón para ir al carrito
+    document.getElementById('miCarrito').addEventListener("click", ()=>{
+        window.location = 'cart.html'
+    });
+    
+    //botón para ir al perfil
+    document.getElementById('miPerfil').addEventListener("click", ()=>{
+        window.location = "my-profile.html"
+    });
+
+    //botón para cerrar sesión
+    document.getElementById('cerrarSesion').addEventListener("click", ()=>{
+        cerrarSesion();
     });
 });
